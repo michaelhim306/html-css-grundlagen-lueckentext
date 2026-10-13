@@ -1,0 +1,404 @@
+/*
+  style.css: design of the app (approved mockup v2).
+  Dark app background, light code area with rounded corners and no border,
+  light element area. Syntax colours: VS Code "Light+".
+*/
+
+:root {
+  --app-hintergrund: #1F2A44;
+  --text-hell: #F4F7FB;
+  --text-gedaempft: #B8C4DC;
+  --code-hintergrund: #FFFFFF;
+  --elemente-hintergrund: #EEF2F8;
+  --elemente-titel: #44516B;
+  --chip-hintergrund: #FFFFFF;
+  --chip-rand: #B7C3D9;
+  --chip-text: #1B1F2A;
+  --luecke-rand: #6F8BC4;
+  --luecke-hintergrund: #E6EEFC;
+  --gefuellt-rand: #2F5BD0;
+  --gefuellt-hintergrund: #DCE7FF;
+  --gefuellt-text: #0B2A7A;
+  --richtig-rand: #1E7B4B;
+  --richtig-hintergrund: #D6F0E0;
+  --richtig-text: #0E4A2B;
+  --falsch-rand: #B3261E;
+  --falsch-hintergrund: #FBDCDA;
+  --falsch-text: #7A1510;
+  --knopf-grau: #CBD3E1;
+  --knopf-gelb: #F5B942;
+  --knopf-text: #1F2A44;
+  --schrift-code: "Cascadia Mono", "Consolas", "Menlo", "DejaVu Sans Mono", monospace;
+  --schrift-ui: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+[hidden] { display: none !important; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--app-hintergrund);
+  color: var(--text-hell);
+  font-family: var(--schrift-ui);
+  overflow: hidden;
+}
+
+/* ---------- layout ---------- */
+
+.app {
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+}
+
+.kopf {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.kopf-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.kopf h1 {
+  margin: 0;
+  font-size: 26px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.kopf p {
+  margin: 0;
+  font-size: 16px;
+  color: var(--text-gedaempft);
+}
+
+.punkte {
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: #2C3B5E;
+  border: 1.5px solid #5A6F9E;
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.kopf-rechts {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.session {
+  font-family: var(--schrift-code);
+  font-size: 11px;
+  color: var(--text-gedaempft);
+}
+
+/* ---------- code area ---------- */
+
+.code-bereich {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  background: var(--code-hintergrund);
+  border-radius: 16px;
+}
+
+.code {
+  padding: 14px 28px 14px 16px;
+}
+
+.zeile {
+  display: flex;
+  align-items: flex-start;
+  min-height: 28px;
+}
+
+.zeilennr {
+  width: 36px;
+  flex: none;
+  padding-right: 16px;
+  text-align: right;
+  color: #6B7686;
+  font-size: 13px;
+  line-height: 28px;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.quelltext {
+  flex: 1;
+  min-width: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-family: var(--schrift-code);
+  font-size: 15px;
+  line-height: 28px;
+  color: #000000;
+}
+
+/* syntax colours (VS Code Light+) */
+.t-tag, .t-sel { color: #800000; }
+.t-attr, .t-prop { color: #E50000; }
+.t-val { color: #0000FF; }
+.t-cv { color: #0451A5; }
+.t-num { color: #098658; }
+.t-cm { color: #008000; }
+.t-pl { color: #000000; }
+
+/* ---------- gaps ---------- */
+
+.luecke {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  height: 24px;
+  margin: 0 2px;
+}
+
+.luecke.leer {
+  min-width: 72px;
+  border: 2px dashed var(--luecke-rand);
+  background: var(--luecke-hintergrund);
+  border-radius: 6px;
+}
+
+.luecke.leer.falsch {
+  border: 1.5px solid var(--falsch-rand);
+  background: var(--falsch-hintergrund);
+}
+
+.luecke.ziel {
+  outline: 2px solid var(--gefuellt-rand);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* an element inside a gap is smaller than in the element area */
+.luecke .chip {
+  height: 24px;
+  min-height: 0;
+  padding: 0 8px;
+  gap: 6px;
+  font-size: inherit;
+  background: var(--gefuellt-hintergrund);
+  border: 1.5px solid var(--gefuellt-rand);
+  color: var(--gefuellt-text);
+  border-radius: 6px;
+}
+
+.luecke.richtig .chip {
+  background: var(--richtig-hintergrund);
+  border-color: var(--richtig-rand);
+  color: var(--richtig-text);
+}
+
+.luecke.falsch .chip {
+  background: var(--falsch-hintergrund);
+  border-color: var(--falsch-rand);
+  color: var(--falsch-text);
+}
+
+.marke {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* ---------- elements (drag and drop items) ---------- */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 14px;
+  background: var(--chip-hintergrund);
+  border: 1.5px solid var(--chip-rand);
+  border-radius: 8px;
+  color: var(--chip-text);
+  font-family: var(--schrift-code);
+  font-size: 15px;
+  line-height: 1;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.chip.wird-gezogen { opacity: 0.35; }
+
+.chip.schwebend {
+  position: fixed;
+  z-index: 1000;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  cursor: grabbing;
+}
+
+body.zieht, body.zieht * { cursor: grabbing; }
+
+.elemente {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+  padding: 16px 20px;
+  background: var(--elemente-hintergrund);
+  border-radius: 16px;
+  color: var(--chip-text);
+}
+
+.elemente-links {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.elemente-titel {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--elemente-titel);
+}
+
+.elemente-liste {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-height: 30vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border-radius: 8px;
+}
+
+.elemente-liste.ziel {
+  outline: 2px dashed var(--luecke-rand);
+  outline-offset: 2px;
+}
+
+/* ---------- buttons ---------- */
+
+.knoepfe {
+  flex: none;
+  display: flex;
+  gap: 12px;
+}
+
+.knopf {
+  min-height: 52px;
+  padding: 0 28px;
+  border: 0;
+  border-radius: 12px;
+  color: var(--knopf-text);
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.knopf:focus-visible {
+  outline: 3px solid var(--knopf-text);
+  outline-offset: 2px;
+}
+
+.knopf-zuruecksetzen { background: var(--knopf-grau); }
+
+.knopf-pruefen {
+  padding: 0 32px;
+  background: var(--knopf-gelb);
+}
+
+/* ---------- smartphone ---------- */
+
+@media (max-width: 700px) {
+  .app {
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .kopf {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .kopf h1 { font-size: 20px; }
+  .kopf p { font-size: 14px; }
+
+  .punkte {
+    padding: 6px 16px;
+    font-size: 16px;
+  }
+
+  .kopf-rechts {
+    flex-wrap: wrap;
+    gap: 6px 12px;
+    min-height: 35px;
+  }
+
+  .zeile { min-height: 26px; }
+
+  .zeilennr {
+    width: 28px;
+    padding-right: 10px;
+    font-size: 12px;
+    line-height: 26px;
+  }
+
+  .code { padding: 10px 14px 10px 8px; }
+
+  .quelltext {
+    font-size: 13px;
+    line-height: 26px;
+  }
+
+  .luecke { height: 22px; }
+  .luecke.leer { min-width: 56px; }
+  .luecke .chip { height: 22px; padding: 0 6px; gap: 5px; }
+  .marke svg { width: 14px; height: 14px; }
+
+  .chip {
+    padding: 0 12px;
+    font-size: 13px;
+  }
+
+  .elemente {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .elemente-titel { font-size: 12px; }
+
+  .elemente-liste {
+    gap: 8px;
+    max-height: 140px;
+  }
+
+  .knoepfe { gap: 10px; }
+
+  .knopf {
+    flex: 1;
+    padding: 0;
+    font-size: 17px;
+  }
+}
