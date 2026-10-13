@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="de-AT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HTML &amp; CSS – Grundlagen</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app">
+
+    <header class="kopf">
+      <div class="kopf-text">
+        <h1>HTML &amp; CSS – Grundlagen</h1>
+        <p>Ziehe die passenden Elemente in die Lücken des Quelltexts.</p>
+      </div>
+      <div class="kopf-rechts">
+        <div id="punkte" class="punkte" aria-live="polite" hidden></div>
+        <div id="session" class="session"></div>
+      </div>
+    </header>
+
+    <main id="code-bereich" class="code-bereich" aria-label="Quelltext">
+      <div id="code" class="code"></div>
+    </main>
+
+    <section id="elemente" class="elemente" aria-label="Elemente">
+      <div class="elemente-links">
+        <h2 class="elemente-titel">Elemente</h2>
+        <div id="elemente-liste" class="elemente-liste"></div>
+      </div>
+      <div class="knoepfe">
+        <button id="btn-zuruecksetzen" class="knopf knopf-zuruecksetzen" type="button">Zurücksetzen</button>
+        <button id="btn-pruefen" class="knopf knopf-pruefen" type="button">Prüfen</button>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
